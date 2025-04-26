@@ -9,18 +9,21 @@ from utils.rabbitmq import wait_for_rabbitmq
 
 logger = setup_logger(__name__)
 
-# # Assunimg that MongoDB is running on the same Docker network as RabbitMQ
-# mongo_client = MongoClient("mongodb://admin:adminpassword@mongodb:27017/")
-# db = mongo_client["message_queue_db"]
-# collection = db["messages"]
-
 
 # Atlas connection string
-uri = "mongodb+srv://tharanihari2698:Hari1998@cluster0.ucye7p6.mongodb.net/?retryWrites=true&w=majority"
+atlas_cluster = os.getenv("MONGO_ATLAS_URI")
 
-# Create client
-client = MongoClient(uri, server_api=ServerApi('1'))
+# Assunimg that MongoDB is running on the same Docker network as RabbitMQ
+local_mongo_url = os.getenv("MONGO_URL", "mongodb://admin:adminpassword@mongodb:27017/")
 
+# Check if Atlas details are available
+if atlas_cluster:
+    client = MongoClient(atlas_cluster, server_api=ServerApi('1'))
+    logger.info("Connecting successful to MongoDB Atlas...")
+else:
+    uri = local_mongo_url
+    logger.info("Connecting to Local MongoDB...")
+    client = MongoClient(uri)
 # Confirm connection
 try:
     client.admin.command('ping')

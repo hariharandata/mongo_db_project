@@ -1,16 +1,4 @@
-```markdown
-[Client/API] 
-    ↓ 
-  POST JSON → [Producer Service]
-                  ↓
-          Publishes to RabbitMQ
-                  ↓
-         [Consumer Service reads from RabbitMQ]
-                  ↓
-         Inserts into MongoDB → [MongoDB]
-                  ↓
-             [Grafana Dashboard reads MongoDB]
-```
+
 
 # 📦 Project Description
 ## MongoDB-RabbitMQ-FastAPI Messaging System
@@ -22,7 +10,19 @@ It implements a producer-consumer architecture:
 -	FastAPI (Producer) accepts HTTP POST requests, serializes the data, and pushes messages into a RabbitMQ queue.
 - Python Consumer listens to the RabbitMQ queue, processes incoming messages, and saves them into a MongoDB database.
 
-
+```markdown
+[Client/API] 
+    ↓ 
+  POST JSON → [Producer Service]
+                  ↓
+          Publishes to RabbitMQ
+                  ↓
+         [Consumer Service reads from RabbitMQ]
+                  ↓
+         Inserts into MongoDB → [MongoDB]
+                  ↓
+             [MongoDB Dashboard reads MongoDB data in MongoDB Atlas]
+```
 
 ## 🚀 Components
 | Component| Role |
@@ -33,6 +33,23 @@ It implements a producer-consumer architecture:
 | RabbitMQ  | Listens to the queue, processes the data, and inserts it into MongoDB. |
 
 
+## 🛠️ Environment Setup
+1. Create a .env file at the root of the project by copying the provided .env.example (or manually create one).
+2.	Update the following environment variables:
+- RabbitMQ username and password.
+- MongoDB username and password.
+3.	MongoDB Atlas Setup (Optional):
+- Create a free account on MongoDB Atlas.
+👉 Get Started with MongoDB Atlas - https://www.w3schools.com/mongodb/mongodb_get_started.php
+- Create a new user inside the Atlas project with appropriate roles.
+- Update the following variables inside your .env file:
+- MONGO_ATLAS_USERNAME
+- MONGO_ATLAS_PASSWORD
+- MONGO_ATLAS_CLUSTER
+- The application will automatically prefer MongoDB Atlas if the credentials are available.
+Otherwise, it will fallback to local MongoDB.
+4.	Important:
+- Make sure your .env is properly configured before starting the Docker containers or running the app locally.
 
 ## ⚙️ Features
 
@@ -122,9 +139,3 @@ This project uses a custom Docker network (app_network) to allow different servi
 • Scalability: The network setup makes it easy to add or replace services without breaking connections.
 
 
-
-
-Connect to mongo DB
-
-mongosh "mongodb+srv://cluster0.ucye7p6.mongodb.net/" --apiVersion 1 --username tharanihari2698
-password - Hari1998

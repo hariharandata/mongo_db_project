@@ -1,0 +1,19 @@
+
+# Change the name to `.env` before running the application and update the username and password for rabbitmq and mongodb.
+# If you want to create a connection to mongoDB Atlas, create a new user in the Atlas UI and update the username and password in the MONGO_ATLAS_URI variable.
+
+# To create a account in the MONGODB Atlas, Read here- https://www.w3schools.com/mongodb/mongodb_get_started.php
+
+# RabbitMQ credentials
+RABBITMQ_DEFAULT_USER=guest
+RABBITMQ_DEFAULT_PASS=guest
+RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+
+# MongoDB credentials
+MONGO_INITDB_ROOT_USERNAME=admin
+MONGO_INITDB_ROOT_PASSWORD=adminpassword
+MONGO_URL=mongodb://admin:adminpassword@mongodb:27017/
+
+# MongoDB Atlas URI
+# Replace the <USERNAME> and <PASSWORD> in the MONGO_ATLAS_URI variable with your username and password.
+MONGO_ATLAS_URI=mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.ucye7p6.mongodb.net/?retryWrites=true&w=majority
