@@ -145,7 +145,7 @@ All services communicate over a shared custom Docker network.
 ```bash
 docker-compose up --build
 ```
-4.	Test FastAPI API at http://localhost:8000
+4.	Test FastAPI API at http://localhost:8000/docs
 
 ##  Additional information
 ### Docker Compose Networks - Summary
