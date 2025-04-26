@@ -1,0 +1,27 @@
+# Start with a slim official Python image
+FROM python:3.10-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only important files first (better for Docker cache)
+COPY pyproject.toml .
+
+# Install build tool
+RUN pip install --upgrade pip build
+
+# Copy all source code
+COPY . /app
+
+# Build and install your package
+RUN python -m build
+RUN pip install dist/*.tar.gz
+
+# Set PYTHONPATH so Python knows where src is
+ENV PYTHONPATH=/app/src
+
+# Expose FastAPI port
+EXPOSE 8000
+
+# Start FastAPI app using Uvicorn
+CMD ["uvicorn", "producer.producer:app", "--host", "0.0.0.0", "--port", "8000"]

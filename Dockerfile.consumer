@@ -1,0 +1,16 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY pyproject.toml .
+
+RUN pip install --upgrade pip build
+
+COPY . /app
+
+RUN python -m build
+RUN pip install dist/*.tar.gz
+
+ENV PYTHONPATH=/app/src
+
+CMD ["python", "src/consumer/consumer.py"]
