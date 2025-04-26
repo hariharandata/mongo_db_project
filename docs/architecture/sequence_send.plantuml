@@ -1,0 +1,14 @@
+@startuml
+actor Client
+participant "FastAPI Producer" as FastAPI
+participant "RabbitMQ Broker" as RabbitMQ
+participant "Consumer Worker" as Consumer
+participant "MongoDB Database" as MongoDB
+
+Client -> FastAPI : POST /send (data)
+FastAPI -> RabbitMQ : Publish message
+RabbitMQ -> Consumer : Deliver message
+Consumer -> MongoDB : Insert data
+Consumer --> RabbitMQ : Ack message
+FastAPI --> Client : Response "Data sent successfully"
+@enduml

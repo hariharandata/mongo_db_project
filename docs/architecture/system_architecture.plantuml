@@ -1,0 +1,11 @@
+@startuml
+actor Client
+
+package "Docker Compose Network" {
+    [FastAPI Producer] --> [RabbitMQ Broker]: Publishes Message
+    [RabbitMQ Broker] --> [Consumer Worker]: Send message
+    [Consumer Worker] --> [MongoDB Database]: Saves Message
+}
+
+Client --> [FastAPI Producer] : Sends HTTP Request
+@enduml

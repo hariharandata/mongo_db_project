@@ -7,7 +7,7 @@ This project demonstrates a simple distributed system using FastAPI, RabbitMQ, a
 
 It implements a producer-consumer architecture:
 
--	FastAPI (Producer) accepts HTTP POST requests, serializes the data, and pushes messages into a RabbitMQ queue.
+- FastAPI (Producer) accepts HTTP POST requests, serializes the data, and pushes messages into a RabbitMQ queue.
 - Python Consumer listens to the RabbitMQ queue, processes incoming messages, and saves them into a MongoDB database.
 
 ```markdown
@@ -33,23 +33,7 @@ It implements a producer-consumer architecture:
 | RabbitMQ  | Listens to the queue, processes the data, and inserts it into MongoDB. |
 
 
-## 🛠️ Environment Setup
-1. Create a .env file at the root of the project by copying the provided .env.example (or manually create one).
-2.	Update the following environment variables:
-- RabbitMQ username and password.
-- MongoDB username and password.
-3.	MongoDB Atlas Setup (Optional):
-- Create a free account on MongoDB Atlas.
-👉 Get Started with MongoDB Atlas - https://www.w3schools.com/mongodb/mongodb_get_started.php
-- Create a new user inside the Atlas project with appropriate roles.
-- Update the following variables inside your .env file:
-- MONGO_ATLAS_USERNAME
-- MONGO_ATLAS_PASSWORD
-- MONGO_ATLAS_CLUSTER
-- The application will automatically prefer MongoDB Atlas if the credentials are available.
-Otherwise, it will fallback to local MongoDB.
-4.	Important:
-- Make sure your .env is properly configured before starting the Docker containers or running the app locally.
+
 
 ## ⚙️ Features
 
@@ -104,6 +88,40 @@ Open - http://localhost:8000/docs and fill the information in the post request.
 ## 🗄️ MongoDB
 - Incoming messages from RabbitMQ are inserted into a MongoDB collection called messages inside the message_queue_db database.
 - Default connection is set to MongoDB Atlas. (Update the URI if using local MongoDB.)
+
+## Architecture diagram
+
+### 📊 System Architecture
+The application is built using a microservices approach. The flow is:
+1. FastAPI Producer receives HTTP requests and publishes messages to RabbitMQ.
+2. RabbitMQ acts as a broker to queue and deliver messages.
+3. Consumer Worker listens to the queue, processes the messages, and stores them into MongoDB.
+![System Architecture](docs/architecture/system_architecture.png)
+
+### 📜 Sequence Diagram for /send Endpoint
+
+When a client sends a API request to the /send endpoint:
+![Sequence Diagram](docs/architecture/sequence_send.png)
+
+
+## 🛠️ Environment Setup
+1. Create a .env file at the root of the project by copying the provided .env.example (or manually create one).
+2.	Update the following environment variables:
+- RabbitMQ username and password.
+- MongoDB username and password.
+3.	MongoDB Atlas Setup (Optional):
+- Create a free account on MongoDB Atlas.
+👉 Get Started with MongoDB Atlas - https://www.w3schools.com/mongodb/mongodb_get_started.php
+- Create a new user inside the Atlas project with appropriate roles.
+- Update the following variables inside your .env file:
+- MONGO_ATLAS_USERNAME
+- MONGO_ATLAS_PASSWORD
+- MONGO_ATLAS_CLUSTER
+- The application will automatically prefer MongoDB Atlas if the credentials are available.
+Otherwise, it will fallback to local MongoDB.
+4.	Important:
+- Make sure your .env is properly configured before starting the Docker containers or running the app locally.
+
 
 ## 🐳 Docker Compose
 
