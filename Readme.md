@@ -76,7 +76,7 @@ mongo_db_project/
 - POST /send → Accepts JSON data and pushes it to RabbitMQ
 
 Example POST request:
-Open - http://localhost:8000/docs and fill the information in the post request.
+Open - http://localhost:8000/docs and fill the information in the post request. (Discussed in the Quick Start section)
 
 
 
@@ -132,10 +132,6 @@ Otherwise, it will fallback to local MongoDB.
 
 All services communicate over a shared custom Docker network.
 
-## 🧹 Future Improvements
-- Add authentication/security for FastAPI.
-- Set up retry mechanisms or dead-letter queues for failed messages.
-- Health checks and monitoring dashboards (e.g., Grafana + Prometheus).
 
 ## 🏁 Quick Start
 1.	Clone the repository
@@ -146,14 +142,18 @@ All services communicate over a shared custom Docker network.
 docker-compose up --build
 ```
 4.	Test FastAPI API at http://localhost:8000/docs
+5. After sending the API request or the data to be updated to the mongoDB, open the MongoDB Atlas with your login credentials. Click the database name and the collection name you mentioned in the .env file. Further, In the mongo DB atlas, visualiztion can be made.
 
 ##  Additional information
 ### Docker Compose Networks - Summary
 
 This project uses a custom Docker network (app_network) to allow different services (RabbitMQ, MongoDB, FastAPI producer, and Consumer) to communicate securely and efficiently.
 
-• Service discovery: Containers communicate using service names instead of IP addresses (e.g., rabbitmq:5672, mongodb:27017).
-• Isolation: Only services on the same network can talk to each other, improving security.
-• Scalability: The network setup makes it easy to add or replace services without breaking connections.
+- Service discovery: Containers communicate using service names instead of IP addresses (e.g., rabbitmq:5672, mongodb:27017).
+- Isolation: Only services on the same network can talk to each other, improving security.
+- Scalability: The network setup makes it easy to add or replace services without breaking connections.
 
-
+## 🧹 Future Improvements
+- Add authentication/security for FastAPI.
+- Set up retry mechanisms or dead-letter queues for failed messages.
+- Health checks and monitoring dashboards (e.g., Grafana + Prometheus).

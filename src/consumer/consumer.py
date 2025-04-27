@@ -12,6 +12,8 @@ logger = setup_logger(__name__)
 
 # Atlas connection string
 atlas_cluster = os.getenv("MONGO_ATLAS_URI")
+mongodb_name = os.getenv("MONGO_DB_NAME", "message_queue_db")
+collection_name = os.getenv("MONGO_COLLECTION_NAME", "messages")
 
 # Assunimg that MongoDB is running on the same Docker network as RabbitMQ
 local_mongo_url = os.getenv("MONGO_URL", "mongodb://admin:adminpassword@mongodb:27017/")

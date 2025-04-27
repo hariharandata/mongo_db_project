@@ -14,6 +14,10 @@ MONGO_INITDB_ROOT_USERNAME=admin
 MONGO_INITDB_ROOT_PASSWORD=adminpassword
 MONGO_URL=mongodb://admin:adminpassword@mongodb:27017/
 
+# MongoDB database and collection names. Change these if you want to use different names.
+MONGO_DB_NAME="message_queue_db"
+MONGO_COLLECTION_NAME="messages"
+
 # MongoDB Atlas URI
 # Replace the <USERNAME> and <PASSWORD> in the MONGO_ATLAS_URI variable with your username and password.
 MONGO_ATLAS_URI=mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.ucye7p6.mongodb.net/?retryWrites=true&w=majority
