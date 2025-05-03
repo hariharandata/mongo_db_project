@@ -32,6 +32,12 @@ It implements a producer-consumer architecture:
 | MongoDB (Atlas or Local)  | Database where consumer stores processed messages. |
 | RabbitMQ  | Listens to the queue, processes the data, and inserts it into MongoDB. |
 
+## Why this project?
+I work as a Data Engineer at Volvo Cars. We have an event-driven messaging service built using MongoDB and RabbitMQ. This system captures messages in specific queues, and it was designed before I joined the team. Later, my teammates and I developed a new data pipeline to capture and automatically process newly ingested vehicle sensor data—such as radar, LiDAR, and ultrasonic data.
+
+However, we lacked proper observability of the data being ingested and processed through this pipeline. To address this, I proposed a proof of concept (PoC) to my team lead: connecting our MongoDB application hosted on OpenShift to MongoDB Atlas for enhanced observability and visualization.
+
+This solution would help our team monitor the volume of data served per sensor and enable us to retrigger the data pipeline by collecting and filtering data based on specific criteria. My team lead has accepted the idea, and we are currently planning to deploy it.
 
 
 
