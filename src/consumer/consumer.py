@@ -1,9 +1,11 @@
+import json
 import os
 import sys
 import time
+
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import json
+
 from utils.logger import setup_logger
 from utils.rabbitmq import wait_for_rabbitmq
 
@@ -20,7 +22,7 @@ local_mongo_url = os.getenv("MONGO_URL", "mongodb://admin:adminpassword@mongodb:
 
 # Check if Atlas details are available
 if atlas_cluster:
-    client = MongoClient(atlas_cluster, server_api=ServerApi('1'))
+    client = MongoClient(atlas_cluster, server_api=ServerApi("1"))
     logger.info("Connecting successful to MongoDB Atlas...")
 else:
     uri = local_mongo_url
@@ -28,7 +30,7 @@ else:
     client = MongoClient(uri)
 # Confirm connection
 try:
-    client.admin.command('ping')
+    client.admin.command("ping")
     logger.info("✅ Connected to MongoDB Atlas")
 except Exception as e:
     logger.error(f"❌ Connection failed: {e}")
@@ -52,19 +54,21 @@ def callback(ch, method, properties, body):
         # Below line tells RabbitMQ not to retry it — discard it.”
         ch.basic_nack(delivery_tag=method.delivery_tag, requeue=False)
 
+
 def main():
     connection = wait_for_rabbitmq()
     # connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
-    channel.queue_declare(queue='data_queue', durable=True)
+    channel.queue_declare(queue="data_queue", durable=True)
     logger.info(" [*] Waiting for messages. To exit press CTRL+C")
-    #It tells RabbitMQ:“Don’t send more than one message at a time
-    #to a worker/consumer until it acknowledges the previous one.”
+    # It tells RabbitMQ:“Don’t send more than one message at a time
+    # to a worker/consumer until it acknowledges the previous one.”
     channel.basic_qos(prefetch_count=1)  # Fair dispatch
-    channel.basic_consume(queue='data_queue', on_message_callback=callback)  # Fair dispatch
+    channel.basic_consume(queue="data_queue", on_message_callback=callback)  # Fair dispatch
     channel.start_consuming()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     try:
         logger.info("Starting RabbitMQ consumer...")
         main()

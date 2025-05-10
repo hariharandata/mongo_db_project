@@ -10,6 +10,6 @@ authors = [{ name="Hariharan", email="tharanihari26@gmail.com" }]
 dependencies = ["fastapi", "uvicorn[standard]", "pika", "pydantic", "pika", "pymongo"]
 
 [tool.ruff]
-line-length = 88
+line-length = 100
 select = ["E", "F", "W", "I"] # Example rule sets
 # Add other configurations as needed

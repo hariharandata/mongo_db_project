@@ -31,7 +31,7 @@ jobs:
           # pip install -r requirements.txt # If you use requirements.txt
 
       - name: Run Ruff Linter
-        run: ruff check .
+        run: ruff check . --fix
 
       # Optional: Add ruff format check if you want to enforce formatting
       # - name: Run Ruff Formatter Check

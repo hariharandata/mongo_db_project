@@ -2,6 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
+
 def setup_logger(name: str, log_file: Path = None) -> logging.Logger:
     """
     Set up a logger with console and optional file handlers.
