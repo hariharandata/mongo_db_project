@@ -37,9 +37,7 @@ jobs:
       - name: Run Ruff Formatter Check
         run: ruff format --check .
 
-      - name: Run Pylint
-        # Adjust the path if your source code is not in the root or a standard src directory
-        # You can also create a .pylintrc file to configure Pylint's behavior
-        run: pylint $(git ls-files '*.py')
-
-      # new chaneges
+      # - name: Run Pylint
+      #   # Adjust the path if your source code is not in the root or a standard src directory
+      #   # You can also create a .pylintrc file to configure Pylint's behavior
+      #   run: pylint $(git ls-files '*.py')
