@@ -3,6 +3,27 @@
 # 📦 Project Description
 ## MongoDB-RabbitMQ-FastAPI Messaging System
 
+## Table of Contents
+
+- [📦 Project Description](#-project-description)
+  - [MongoDB-RabbitMQ-FastAPI Messaging System](#mongodb-rabbitmq-fastapi-messaging-system)
+- [🚀 Components](#-components)
+- [Why this project?](#why-this-project)
+- [⚙️ Features](#️-features)
+- [📂 Project Structure](#-project-structure)
+- [📡 FastAPI Producer API](#-fastapi-producer-api)
+- [🐇 RabbitMQ](#-rabbitmq)
+- [🗄️ MongoDB](#️-mongodb)
+- [Architecture diagram](#architecture-diagram)
+  - [📊 System Architecture](#-system-architecture)
+  - [📜 Sequence Diagram for /send Endpoint](#-sequence-diagram-for-send-endpoint)
+- [🛠️ Environment Setup](#️-environment-setup)
+- [🐳 Docker Compose](#-docker-compose)
+- [🏁 Quick Start](#-quick-start)
+- [ Additional information](#-additional-information)
+  - [Docker Compose Networks - Summary](#docker-compose-networks---summary)
+- [🧹 Future Improvements](#-future-improvements)
+
 This project demonstrates a simple distributed system using FastAPI, RabbitMQ, and MongoDB (MongoDB Atlas or local MongoDB) within a Docker Compose setup.
 
 It implements a producer-consumer architecture:

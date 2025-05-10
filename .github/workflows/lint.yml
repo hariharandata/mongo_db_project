@@ -24,9 +24,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install ruff
-          # If you have other dependencies needed for linting (e.g., plugins for ruff)
-          # pip install -r requirements.txt # or based on your pyproject.toml
+          pip install ruff pylint
+          # If you have other dependencies needed for linting (e.g., plugins for ruff or pylint)
+          # Or if your linters need to import your project code to work correctly:
+          # pip install -e . # If your pyproject.toml is set up for editable installs
+          # pip install -r requirements.txt # If you use requirements.txt
 
       - name: Run Ruff Linter
         run: ruff check .
@@ -34,3 +36,8 @@ jobs:
       # Optional: Add ruff format check if you want to enforce formatting
       # - name: Run Ruff Formatter Check
       #   run: ruff format --check .
+
+      - name: Run Pylint
+        # Adjust the path if your source code is not in the root or a standard src directory
+        # You can also create a .pylintrc file to configure Pylint's behavior
+        run: pylint $(git ls-files '*.py')
